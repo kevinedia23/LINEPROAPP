@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LINEPROAPP</string>
+    <string name="title_home">Programación Lineal</string>
+    <string name="editText_var">Ingrese numero de variables</string>
+    <string name="editText_RES">Ingrese numero de restricciones</string>
+    <string name="btn_generar">Generar</string>
+    <string name="btn_limpiar">Limpiar</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>

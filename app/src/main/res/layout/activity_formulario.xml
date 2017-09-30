@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.k3vin.lineproapp.Formulario">
+
+    <TableLayout
+        android:id="@+id/tabla_funcionO"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+            <TextView
+                android:text="Funcion Objetivo"
+                android:textAlignment="center"
+                android:padding="10dp"
+                />
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/espacio1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:layout_below="@id/tabla_funcionO"
+        />
+
+    <TableLayout
+        android:id="@+id/tabla_VAR_RES"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/espacio1"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Restricciones"
+            android:textAlignment="center"
+            />
+
+    </TableLayout>
+
+
+
+
+</RelativeLayout>

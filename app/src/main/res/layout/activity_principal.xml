@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.k3vin.lineproapp.Principal">
+
+
+        <TextView
+            android:id="@+id/Titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/tamanio_Titulo"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/title_home" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/variables"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@id/Titulo"
+            >
+
+            <EditText
+                android:id="@+id/no_variables"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="number"
+                android:hint="@string/editText_var"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/espacio1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/variables"
+        android:textSize="45dp"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/restricciones"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@id/espacio1"
+        >
+
+        <EditText
+            android:id="@+id/no_restricciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:inputType="number"
+            android:hint="@string/editText_RES"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/espacio2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:layout_below="@id/restricciones"
+    />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/espacio2"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/btn_generar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_generar"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            />
+        <Button
+            android:id="@+id/btn_limpiar"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_limpiar"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
