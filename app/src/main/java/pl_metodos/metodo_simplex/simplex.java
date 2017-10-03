@@ -16,8 +16,8 @@ public class simplex {
     }
 
     public simplex(int nRes, int nVar){
-        filas = nRes;
-        columnas = nVar;
+        filas = nRes + 1;
+        columnas = nVar + 1;
         tabla = new float[filas][];
 
         for(int i=0; i<filas; i++){
@@ -70,7 +70,7 @@ public class simplex {
             if(i != filaPivote){
                 for(int j=0; j<columnas;j++){
                     float c=valoresPivoteColumna[i];
-                    tabla[i][j] = tabla[i][j] - (c*nuevaFila[j]);
+                    tabla[i][j] = tabla[i][j] - (c * nuevaFila[j]);
                 }
             }
         }
@@ -132,7 +132,7 @@ public class simplex {
         int c, ubicacion = 0;
         maximo = valores[0];
 
-        for(c = 0; c<valores.length;c++){
+        for(c = 1; c<valores.length;c++){
             if(Float.compare(valores[c], maximo) > 0){
                 maximo = valores[c];
                 ubicacion = c;
