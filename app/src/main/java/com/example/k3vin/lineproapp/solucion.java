@@ -1,5 +1,6 @@
 package com.example.k3vin.lineproapp;
 
+import android.app.ActionBar;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,20 +23,18 @@ import pl_metodos.metodo_simplex.simplex;
 
 public class solucion extends AppCompatActivity {
 
-    private TextView tv;
     private ArrayList<String> listado;
     private ArrayList<String> funcionObjetivo;
     private int variables;
     private int restricciones;
     private String metodo;
+    private String formato;
     private float[][] tabla;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solucion);
-        tv = (TextView) findViewById(R.id.tv_resultado);
-
 
         listado = new ArrayList<>();
         funcionObjetivo = new ArrayList<>();
@@ -44,15 +43,26 @@ public class solucion extends AppCompatActivity {
         listado = getIntent().getStringArrayListExtra("lista");
         funcionObjetivo = getIntent().getStringArrayListExtra("funcion_objetivo");
         metodo = getIntent().getStringExtra("metodo");
+        formato = getIntent().getStringExtra("formato");
         tabla = new float[restricciones + 1][variables + variables + 1];
 
         crearTabla();//Se estandariza la tabla para resolver simplex con maximizacion
 
-        switch (metodo){
-            case "simplex":
-                exeSimplex();
-                break;
+        if(formato.equals("MAX")){
+            switch (metodo){
+                case "simplex":
+                    exeSimplex();
+                    break;
+            }
+        }else{
+            switch (metodo){
+                case "simplex":
+                    exeSimplex();
+                    break;
+            }
         }
+
+
 
         ScrollView sv = new ScrollView(this);
         TableLayout tl = dibujarTabla();
@@ -81,7 +91,6 @@ public class solucion extends AppCompatActivity {
         }
 
         estandarizar(tabla , iteracion);
-        Toast.makeText(getApplicationContext(), funcionObjetivo.get(0), Toast.LENGTH_SHORT).show();
     }
 
     private TableLayout dibujarTabla(){
@@ -106,6 +115,55 @@ public class solucion extends AppCompatActivity {
 
             tl.addView(tr , paramsTl);
         }
+
+        int vz = tabla[tabla.length-1].length;
+        float z = tabla[tabla.length-1][vz-1];
+
+        TableRow tr = new TableRow(this);
+        TextView tv = new TextView(this);
+        tv.setTextSize(10);
+        tv.setBackgroundColor(Color.WHITE);
+        tv.setGravity(Gravity.CENTER);
+        tv.setPadding(10, 10, 10, 10);
+        tv.setText("La Solucion optimizada es:");
+        tr.addView(tv, paramsTr);
+
+        tl.addView(tr, paramsTl);
+
+        TableRow trz = new TableRow(this);
+        TextView tvz = new TextView(this);
+        tvz.setTextSize(25);
+        tvz.setTextColor(Color.BLUE);
+        tvz.setBackgroundColor(Color.WHITE);
+        tvz.setGravity(Gravity.CENTER);
+        tvz.setPadding(10, 10, 10, 10);
+        tvz.setText("Z = " +z);
+        trz.addView(tvz, paramsTr);
+
+        tl.addView(trz, paramsTl);
+
+        float[] resultados = new float[variables];
+        int contador = variables - 1;
+
+        for(int b=tabla[tabla.length-1].length - 2; b>=variables; b--){
+            resultados[contador] = tabla[tabla.length-1][b];
+            contador--;
+        }
+
+        for(int r=0; r<resultados.length; r++){
+            TableRow trr = new TableRow(this);
+            TextView tvv = new TextView(this);
+            tvv.setTextSize(25);
+            tvv.setTextColor(Color.RED);
+            tvv.setBackgroundColor(Color.WHITE);
+            tvv.setGravity(Gravity.CENTER);
+            tvv.setPadding(10, 10, 10, 10);
+            tvv.setText("X"+(r+1) + " = " + resultados[r]);
+            trr.addView(tvv, paramsTr);
+
+            tl.addView(trr, paramsTl);
+        }
+
 
         //Toast.makeText(getApplicationContext(), metodo, Toast.LENGTH_SHORT).show();
         Snackbar.make(findViewById(android.R.id.content), "Metodo usado: " + metodo, Snackbar.LENGTH_LONG).show();

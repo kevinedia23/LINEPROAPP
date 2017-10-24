@@ -1,11 +1,17 @@
 package com.example.k3vin.lineproapp;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 //import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -55,8 +61,12 @@ public class Principal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String valor = no_var.getText().toString() + "-" + no_RES.getText().toString();
-                Intent intent = new Intent(Principal.this , Formulario.class);
-                startActivity(intent.putExtra("resultado", valor));
+                if(valor.length() == 1 || valor.length() == 2){
+                    Toast.makeText(getApplicationContext(), "Ingresa la informacion faltante", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(Principal.this, Formulario.class);
+                    startActivity(intent.putExtra("resultado", valor));
+                }
                // Toast.makeText(getApplicationContext(), valor, Toast.LENGTH_SHORT).show();
             }
         });
@@ -73,4 +83,37 @@ public class Principal extends AppCompatActivity {
         //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation, menu);
+        return true;
+    }
+
+    public static class cuadroDialogo extends DialogFragment{
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("LINEPROAPP").setMessage("Proyecto IO1 - Grupo #13")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+            return builder.create();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                DialogFragment ad = new cuadroDialogo();
+                ad.show(getSupportFragmentManager(), "dialogo");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

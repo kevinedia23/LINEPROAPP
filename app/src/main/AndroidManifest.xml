@@ -21,7 +21,9 @@
         <activity
             android:name=".Formulario"
             android:screenOrientation="portrait" />
-        <activity android:name=".solucion"></activity>
+        <activity android:name=".solucion"
+            android:screenOrientation="portrait"
+            ></activity>
     </application>
 
 </manifest>
